@@ -1,0 +1,125 @@
+// calcRoot2methods.cpp: определяет точку входа для консольного приложения.
+//
+
+#include "stdafx.h"
+#include <stdio.h>
+#include <conio.h>
+#include <math.h>
+const double e = 2.718;
+double f1(double x){
+	return sin(x)-x+2;
+}
+double fDer1(double x)
+{
+	return cos(x)-1;
+}
+double sDer1(double x)
+{
+	return -sin(x);
+}
+
+double f2(double x)
+{
+	if (x<=0) x=0.001;
+	return pow(e, x)+log(x/10)+2;
+}
+double fDer2(double x)
+{
+	if (x==0) x=0.00001;
+	return pow(e, x)+1/x;
+}
+double sDer2(double x)
+{
+	if (x==0) x=0.1;
+	pow(5, x);
+	double temp2 = -1/(x*x);
+	return pow(e, x)-1/(x*x);
+}
+
+int chordMeth(double, double, double, double(*)(double), double(*)(double), double*, long long*);
+int tanMeth(double, double, double, double(*)(double),  double(*)(double), double(*)(double), double*, long long*);
+
+int main()
+{
+	double a, b, eps, x; int fl;
+	long long c;
+	printf("Enter a, b, eps: ");
+	scanf("%lf%lf%lf", &a, &b, &eps);
+	printf("%lf", sDer2(0.5));
+	//---F1---
+	/*if(chordMeth(a, b, eps, f1, fDer1, &x, &c)) printf("F1, chordMeth: Cannot find ans\n");
+	else{
+		printf("F1, chordMeth: x=%lf\n", x);
+		printf("Iters: %d\n", c);
+	}
+
+	if(tanMeth(a, b, eps, f1, fDer1, sDer1, &x, &c)) printf("F1, tanMeth: Cannot find ans\n");
+	else{
+		printf("F1, tanMeth: x=%lf\n", x);
+		printf("Iters: %d\n", c);
+	}
+
+	//---F2---
+	if(chordMeth(a, b, eps, f2, fDer2, &x, &c)) printf("F2, chordMeth: Cannot find ans\n");
+	else{
+		printf("F2, chordMeth: x=%lf\n", x);
+		printf("Iters: %d\n", c);
+	}
+
+	if(tanMeth(a, b, eps, f2, fDer2, sDer2, &x, &c)) printf("F2, tanMeth: Cannot find ans\n");
+	else{
+		printf("F2, tanMeth: x=%lf\n", x);
+		printf("Iters: %d\n", c);
+	}*/
+	getch();
+	return 0;
+}
+
+int chordMeth(double a,double b,double eps,double f(double x), double fDer(double x), double* ans, long long* c)
+{
+	int fl=1;
+	double x;
+	*c=0;
+	if(f(a)*f(b)<0)
+	{
+		if(fDer(a)*fDer(b)>=0)
+		{
+			fl=0;
+			do{
+				*c+=1;
+				x = a-(b-a)*f(a)/(f(b)-f(a));
+				if(f(x)*f(a)<0)
+					b=x;
+				else
+					a=x;
+			}while(fabs(f(x))>eps);
+			*ans=x;
+		}
+	}
+	return fl;
+}
+int tanMeth(double a,double b,double eps,double f(double x),double fDer(double x),double sDer(double x),double* ans,long long* c)
+{
+	int fl=1;
+	double x;
+	if(f(a)*f(b)<0)
+	{
+		if(fDer(a)*fDer(b)>=0)
+		{
+			if(sDer(a)*sDer(b)>=0)
+			{
+				fl=0;
+				if(f(a)*sDer(a)>0)
+					x=a-f(a)/fDer(a);
+				else
+					x=b-f(b)/fDer(b);
+				do{
+					*c+=1;
+					x=x-f(x)/fDer(x);
+				}while(fabs(f(x))>eps);
+				*ans=x;
+			}
+		}
+	}
+	return fl;
+}
