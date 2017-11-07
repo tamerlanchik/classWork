@@ -59,7 +59,7 @@ int main()
      			
 			case 2:
 				printf("Enter a, b, eps: \n");
-				printf("![a;b]range doesnt include \"0\" inside");
+				printf("![a;b]range doesnt include \"0\" inside\n");
 	     	scanf("%lf%lf%lf", &a, &b, &eps);
 				if(chordMeth(a, b, eps, f2, fDer2, &x, &c)) printf("F2, chordMeth: Cannot find ans\n");
 				else{
@@ -105,6 +105,8 @@ int tanMeth(double a,double b,double eps,double f(double x),double fDer(double x
 {
 	int fl=1;
 	double x;
+	
+	
 	if(f(a)*f(b)<0)
 	{
 		if(fDer(a)*fDer(b)>=0)
