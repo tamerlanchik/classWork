@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <math.h>
 const double e = 2.718;
-double eps;
 double f1(double x){
 	return sin(x)-x+2;
 }
@@ -17,26 +16,23 @@ double sDer1(double x)
 
 double f2(double x)
 {
-	if (x<=0) x=eps/2;
 	return pow(e, x)+log(x/10)+2;
 }
 double fDer2(double x)
 {
-	if (x==0) return -HUGE_VAL;	
 	return pow(e, x)+1/x;
 }
 double sDer2(double x)
 {
-	if (x==0) return -HUGE_VAL;
 	return pow(e, x)-1/(x*x);
 }
 
-int chordMeth(double, double, double, double(*)(double), double(*)(double), double*, long long*);
-int tanMeth(double, double, double, double(*)(double),  double(*)(double), double(*)(double), double*, long long*);
+int chordMeth(double, double, double, double(*)(double), double(*)(double), double*, int*);
+int tanMeth(double, double, double, double(*)(double),  double(*)(double), double(*)(double), double*, int*);
 
 int main()
 {
-	double a, b, x; int c, n, y;
+	double a, b, x, eps; int c, n, y;
 	do{
 		printf("1: F=sin(x)-x-2)\n");
 		printf("2: F=e^x+lg(x/10)+2\n");
@@ -48,13 +44,13 @@ int main()
      		printf("Enter a, b, eps: \n");
 	     	scanf("%lf%lf%lf", &a, &b, &eps);
      		if(chordMeth(a, b, eps, f1, fDer1, &x, &c)) 
-	     		printf("ChordMeth": Cannot find ans\n");
+	     		printf("ChordMeth: Cannot find ans\n");
 				else{
-					printf("ChordMeth": x=%lf\n", x);
+					printf("ChordMeth: x=%lf\n", x);
 					printf("Iters: %d\n", c);
 				}
 				if(tanMeth(a, b, eps, f1, fDer1, sDer1, &x, &c))
-					printf("TanMeth": Cannot find ans\n");
+					printf("TanMeth: Cannot find ans\n");
 				else{
 					printf("TanMeth: x=%lf\n", x);
 					printf("Iters: %d\n", c);
@@ -63,7 +59,7 @@ int main()
      			
 			case 2:
 				printf("Enter a, b, eps: \n");
-				printf("![a;b]range doesnt include "0" inside")
+				printf("![a;b]range doesnt include \"0\" inside");
 	     	scanf("%lf%lf%lf", &a, &b, &eps);
 				if(chordMeth(a, b, eps, f2, fDer2, &x, &c)) printf("F2, chordMeth: Cannot find ans\n");
 				else{
@@ -77,18 +73,19 @@ int main()
 					printf("Iters: %d\n", c);
 				}
 				break;
+            }
 	}while(y!=3);
 	return 0;
 }
 
-int chordMeth(double a,double b,double eps,double f(double x), double fDer(double x), double* ans, long long* c)
+int chordMeth(double a,double b,double eps,double f(double x), double fDer(double x), double* ans, int* c)
 {
 	int fl=1;
 	double x;
 	*c=0;
 	if(f(a)*f(b)<0)
 	{
-		if(fDer(a)*fDer(b)>=0)
+		if(fDer(a)*fDer(b)>0)
 		{
 			fl=0;
 			do{
@@ -104,15 +101,15 @@ int chordMeth(double a,double b,double eps,double f(double x), double fDer(doubl
 	}
 	return fl;
 }
-int tanMeth(double a,double b,double eps,double f(double x),double fDer(double x),double sDer(double x),double* ans,long long* c)
+int tanMeth(double a,double b,double eps,double f(double x),double fDer(double x),double sDer(double x),double* ans, int* c)
 {
 	int fl=1;
 	double x;
 	if(f(a)*f(b)<0)
 	{
-		if(fDer(a)*fDer(b)>=0)
+		if(fDer(a)*fDer(b)>0)
 		{
-			if(sDer(a)*sDer(b)>=0)
+			if(sDer(a)*sDer(b)>0)
 			{
 				fl=0;
 				if(f(a)*sDer(a)>0)
@@ -122,7 +119,7 @@ int tanMeth(double a,double b,double eps,double f(double x),double fDer(double x
 				do{
 					*c+=1;
 					x=x-f(x)/fDer(x);
-				}while(fabs(f(x))>eps);
+				} while(fabs(f(x))>eps);
 				*ans=x;
 			}
 		}
