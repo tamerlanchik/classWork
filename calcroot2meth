@@ -1,4 +1,6 @@
 // calcRoot2methods.cpp: определяет точку входа для консольного прило
+#include "stdafx.h"
+#include <conio.h>
 #include <stdio.h>
 #include <math.h>
 const double e = 2.718;
@@ -105,8 +107,7 @@ int tanMeth(double a,double b,double eps,double f(double x),double fDer(double x
 {
 	int fl=1;
 	double x;
-	
-	
+	*c=0;
 	if(f(a)*f(b)<0)
 	{
 		if(fDer(a)*fDer(b)>=0)
@@ -128,4 +129,3 @@ int tanMeth(double a,double b,double eps,double f(double x),double fDer(double x
 	}
 	return fl;
 }
-    
