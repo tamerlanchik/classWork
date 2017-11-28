@@ -1,0 +1,12 @@
+def bubbleSort(a, k, n):
+    i=0
+    fl=1
+    while(fl):
+    	    fl=0;
+    	    for j in range(k*n-i-1):
+    	        if a[j//k][j%k]>a[(j+1)//k][(j+1)%k]:
+    	            fl=1
+    	            a[j//k][j%k], a[(j+1)//k][(j+1)%k] = a[(j+1)//k][(j+1)%k], a[j//k][j%k]
+    	            print(j//k, j%k, a[j//k][j%k], a[(j+1)//k][(j+1)%k])
+    	    i+=1
+    return a
