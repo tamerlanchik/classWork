@@ -7,6 +7,16 @@
 #include <string.h>
 const int m=40, q=200;
 int div_by_s(char*,char[][m]);
+char* strcat(char* dest, char src[])
+{
+	char* s=dest;
+	while(*dest) dest++;
+	while(*src){
+		*dest++=*src++;
+	}
+  *dest='\0';
+	return s;
+}
 int strlen(char* a)
 {
 	int i=0;
