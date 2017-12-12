@@ -90,14 +90,20 @@ int div_by_s(char* s, char w[][m]){
 void sortWords(char w[][m], int n)
 {
 	char buf[m];
-	int reps[];
+	int keys[n], temp;
+	for(int i=0; i<n; i++)
+		keys[i]=repN(w[i]);
+
 	for(int i=0; i<n-1; i++)
 		for(int j=i+1; j<n; j++)
-			if(repN(w[i])>repN(w[j]))
+			if(keys[i]>keys[j])
 			{
 				strcpy(buf, w[i]);
 				strcpy(w[i], w[j]);
 				strcpy(w[j], buf);
+				temp=keys[i];
+				keys[i]=keys[j];
+				keys[j]=temp;
 			}
 }
 
