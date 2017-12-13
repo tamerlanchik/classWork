@@ -39,7 +39,7 @@ int main()
 	scanf("%lf", &eps);
 	do{
 		printf("1: F=sin(x)-x-2)\n");
-		printf("2: F=e^x+lg(x/10)+2\n");
+		printf("2: F=e^x+ln(x/10)+2\n");
 		printf("3: Exit\n");
 		scanf("%d", &y);
 		
