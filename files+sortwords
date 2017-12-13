@@ -1,0 +1,248 @@
+#include "stdafx.h"
+#include <conio.h>
+#include <stdio.h>
+#include <stdlib.h>
+//#include <string.h>
+const int m=400, q=100;
+
+int div_by_s(char*,char[][m]);
+char* strcat(char* dest, char* src)
+{
+	char* s=dest;
+	while(*dest) dest++;
+	while(*src){
+		*dest++=*src++;
+	}
+	*dest='\0';
+	return s;
+}
+int strlen(char* a)
+{
+	int i=0;
+	while(a[i++]) ;
+	return i;
+}
+void strcpy(char* a, char* b)
+{
+	while(*a++=*b++) ;
+}
+void swapInt(int* a, int* b)
+{
+	int temp=*a;
+	*a=*b;
+	*b=temp;
+}
+void swapStr(char* a, char* b)
+{
+	char* temp=(char*)malloc(strlen(a)+1);
+	strcpy(temp, a);
+	strcpy(a, b);
+	strcpy(b, temp);
+}
+void outputMatrix(char[][m], int);
+void sortWords(char[][m], int);
+int repN(char*);
+void buildStr(char*,char[][m], int);
+int newFile(char*);
+int outFile(char*);
+int writeFile(char*);
+int main()
+{
+	char inpFN[25], outFN[25], temp[25];
+	int keyM, keyF;
+	printf("Enter input file name:\n");
+	scanf("%s", inpFN);
+	//printf("Enter output file name:\n");
+	//scanf("%s", outFN);
+	do(
+	{
+		printf("1-Create File\n");
+		printf("2-Read File\n");
+		printf("3-Modificate file\n");
+		printf("4-Read out file\n");
+		printf("5-Exit\n");
+		scanf("%d", &keyM);
+
+		switch(keyM)
+		{
+		case 1: writeFile(inFN); break;
+		case 2: readFile(inFN); break;
+		case 3: 
+			printf("Enter output file name:\n");
+			scanf("%s", outFN);
+			newFile(inFN, outFN);
+			break;
+		case 4: break;
+		}
+	}while(keyM!=5);
+
+	do(
+		}
+	if(!readFile(inpFN))
+		printf("Success write\n\n");
+	printf("Result:\n");
+	if(!outFile("output.txt"))
+		printf("Success output\n");
+	
+	//puts(ans);
+	getch();
+	return 0;
+}
+
+int div_by_s(char* s, char w[][m]){
+	int n=strlen(s)+1;
+	strcat(s, " ");
+	int c=0, k=0;
+	char t[m];
+	for(int i=0; i<n; i++)
+	{
+		if(s[i]!=' ')
+			t[c++]=s[i];
+		else
+			if(c>0){
+				t[c]='\0';
+				strcpy(w[k++], t);
+				c=0;
+			}
+	}
+	return k;
+}
+
+void sortWords(char w[][m], int n)
+{
+	int keys[m];
+	for(int i=0; i<n; i++)
+		keys[i]=repN(w[i]);
+	for(int i=0; i<n-1; i++)
+		for(int j=i+1; j<n; j++)
+			if(keys[i]>keys[j])
+			{
+				swapStr(w[i], w[j]);
+				swapInt(&keys[i], &keys[j]);
+			}
+}
+int repN(char* s)
+{
+	int l, l1, k=0, fl=1;
+	char rs[m];
+	l=strlen(s);
+	for(int i=0; i<l-1; i++)
+	{
+		for(int j=i+1; j<l; j++)
+		{
+			fl=1;
+			if(s[i]==s[j])
+			{
+				l1=strlen(rs);
+				for(int ij=0; ij<l1; ij++)
+					if(s[i]==rs[ij])
+						fl=0;
+				if(fl)
+					rs[k++]=s[i];
+			}
+			rs[k]='\0';
+		}
+	}
+	return k;
+}
+
+void outputMatrix(char a[][m], int u)
+{
+	for(int i=0; i<u; i++)
+
+	{
+		puts(a[i]);
+	}
+}
+
+void buildStr(char* s, char w[][m], int n)
+{
+	for(int i=0; i<n; i++)
+	{
+		strcat(s, strcat(w[i], " "));
+	}
+}
+int newFile(char* fn)
+{
+	FILE *streamIn;
+	FILE *streamOut;
+	if((streamIn=fopen(fn, "r"))==NULL)
+	{
+		printf("Error opening input file\n");
+		return 1;
+	}
+	if((streamOut=fopen("output.txt", "w"))==NULL)
+	{
+		printf("Error opening output file\n");
+		return 1;
+	}
+	while(!feof(streamIn))
+	{
+		int n;
+		char w[q][m];
+		char buf[80];
+		fgets(buf, 80, streamIn);
+		
+		int i=0;
+		while(buf[i++]) ;
+		buf[i-1]='\0';
+		puts(buf);
+
+		n=div_by_s(buf, w);
+		sortWords(w, n);
+		//outputMatrix(w, n);
+		//printf("\n\n");
+		char ans[q]="";
+		printf("Ans: %s\n", ans);
+		buildStr(ans, w, n);
+
+		puts(ans);
+		strcat(ans, "\n");
+		fputs(ans, streamOut);
+	}
+	fclose(streamIn);
+	fclose(streamOut);
+	return 0;
+}
+
+int outFile(char* fn)
+{
+	FILE *stream;
+	char buf[80];
+	if((stream=fopen(fn, "r"))==NULL)
+	{
+		printf("Error opening file\n");
+		return 1;
+	}
+	while(!feof(stream))
+	{
+		fgets(buf, 80, stream);
+		puts(buf);
+		printf("\n");
+	}
+	fclose(stream);
+	return 0;
+}
+int writeFile(char* fn)
+{
+	FILE *stream;
+	char str[80], ch;
+	if((stream=fopen(fn, "w"))==NULL)
+	{
+		printf("Error opening file\n");
+		return 1;
+	}
+	do{
+		printf("Input string: \n");
+		gets(str);
+		printf("Exit-y/n");
+		ch=getch();
+		printf("\n");
+		if(ch!='y')
+			strcat(str, "\n");
+		int res=fputs(str, stream);
+		if(!res)
+			printf("Success write\n");
+	}while(ch!='y');
+	return 0;
+}
