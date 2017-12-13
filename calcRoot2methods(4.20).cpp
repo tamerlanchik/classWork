@@ -5,7 +5,7 @@
 #include <math.h>
 const double e = 2.718;
 double f1(double x){
-	return sin(x)-x-2;
+	return sin(x)-x+2;
 }
 double fDer1(double x)
 {
@@ -38,7 +38,7 @@ int main()
 	printf("Eps: ");
 	scanf("%lf", &eps);
 	do{
-		printf("1: F=sin(x)-x-2)\n");
+		printf("1: F=sin(x)-x+2)\n");
 		printf("2: F=e^x+ln(x/10)+2\n");
 		printf("3: Exit\n");
 		scanf("%d", &y);
