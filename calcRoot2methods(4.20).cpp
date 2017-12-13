@@ -1,11 +1,11 @@
-// calcRoot2methods.cpp: определяет точку входа для консольного прило
+// calcRoot2methods.cpp: Г®ГЇГ°ГҐГ¤ГҐГ«ГїГҐГІ ГІГ®Г·ГЄГі ГўГµГ®Г¤Г  Г¤Г«Гї ГЄГ®Г­Г±Г®Г«ГјГ­Г®ГЈГ® ГЇГ°ГЁГ«Г®
 #include "stdafx.h"
 #include <conio.h>
 #include <stdio.h>
 #include <math.h>
 const double e = 2.718;
 double f1(double x){
-	return sin(x)-x+2;
+	return sin(x)-x-2;
 }
 double fDer1(double x)
 {
