@@ -43,6 +43,7 @@ int main()
 		printf("3: Exit\n");
 		scanf("%d", &y);
 		
+		
 		switch(y) {
      	case 1: 
      		printf("Enter a, b \n");
