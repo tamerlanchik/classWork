@@ -148,13 +148,12 @@ int newFile(char* inputFN, char* outputFN)
     }
     while(!feof(streamIn))
     {
-        *ans='\0';
-        //*buf='\0';
         fgets(buf, 80, streamIn);
         buf[strlen(buf)-2]='\0';
 
         n=divideByWords(buf, w);
         sortWords(w, n);
+        *ans='\0';
         buildStr(ans, w, n);
 
         puts(ans);
@@ -196,6 +195,7 @@ int writeFile(char* fn)
     }
     do{
         printf("Input string: \n");
+        fflush(stdin);
         gets(str);
         printf("Exit-y/n");
         ch=getch();
