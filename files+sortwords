@@ -2,12 +2,9 @@
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
-//#include <string.h>
+#include <string.h>
 const int m=255, q=50;
 
-char* strcat(char*,char*);
-int strlen(char*);
-void strcpy(char*,char*);
 void swapInt(int*,int*);
 void swapStr(char*,char*);
 
@@ -46,7 +43,7 @@ int main()
             newFile(inputFN, outputFN);
             break;
         case 4: readFile(outputFN); break;
-        case 5: printf("Exit..."); break;
+        case 5: break;
         }
     }while(key!=5);
 
@@ -95,11 +92,10 @@ int repN(char* s)
     {
         for(int j=i+1; j<l; j++)
         {
-            fl=1;
             if(s[i]==s[j])
             {
-                l1=strlen(rs);
-                for(int ij=0; ij<l1; ij++)
+                fl=1;
+                for(int ij=0; ij<repCount; ij++)
                     if(s[i]==rs[ij])
                         fl=0;
                 if(fl)
@@ -133,22 +129,23 @@ int newFile(char* inputFN, char* outputFN)
     char ans[q];
     char w[q][m];
     int n;
-    FILE *streamR;
-    FILE *streamWr;
-    if((streamR=fopen(inputFN, "r"))==NULL)
+    FILE *streamIn;
+    FILE *streamOut;
+    if((streamIn=fopen(inputFN, "r"))==NULL)
     {
         printf("Error opening input file\n");
         return 1;
     }
-    if((streamWr=fopen(outputFN, "w"))==NULL)
+    if((streamOut=fopen(outputFN, "w"))==NULL)
     {
         printf("Error opening output file\n");
         return 1;
     }
-    while(!feof(streamR))
+    while(!feof(streamIn))
     {
-        fgets(buf, 80, streamR);
-        buf[strlen(buf)-2]='\0';
+        fgets(buf, 80, streamIn);
+        if(buf[strlen(buf)-1]=='\n')
+            buf[strlen(buf)-1]='\0';
 
         n=divideByWords(buf, w);
         sortWords(w, n);
@@ -157,13 +154,11 @@ int newFile(char* inputFN, char* outputFN)
 
         puts(ans);
         strcat(ans, "\n");
-        if(!fputs(ans, streamWr))
+        if(!fputs(ans, streamOut))
             printf("Success\n\n");
-        else
-            printf("Error\n\n");
     }
-    fclose(streamR);
-    fclose(streamWr);
+    fclose(streamIn);
+    fclose(streamOut);
     return 0;
 }
 
@@ -194,9 +189,9 @@ int writeFile(char* fn)
         printf("Error opening file\n");
         return 1;
     }
-    fflush(stdin);      //чистим входной поток
     do{
         printf("Input string: \n");
+        fflush(stdin);
         gets(str);
         printf("Exit-y/n");
         ch=getch();
@@ -210,26 +205,6 @@ int writeFile(char* fn)
     }while(ch!='y');
     fclose(stream);
     return 0;
-}
-char* strcat(char* dest, char* src)
-{
-    char* s=dest;
-    while(*dest) dest++;
-    while(*src){
-        *dest++=*src++;
-    }
-    *dest='\0';
-    return s;
-}
-int strlen(char* a)
-{
-    int i=0;
-    while(a[i++]) ;
-    return i;
-}
-void strcpy(char* a, char* b)
-{
-    while(*a++=*b++) ;
 }
 void swapInt(int* a, int* b)
 {
