@@ -1,4 +1,4 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,19 +35,18 @@ int main()
         printf("3-Sort file\n");
         printf("4-Read new file\n");
         printf("5-Exit\n");
-        //scanf("%d", &key);
-        key=getch();
+        scanf("%d", &key);
         switch(key)
         {
-        case '1': writeFile(inputFN); break;
-        case '2': readFile(inputFN); break;
-        case '3':
+        case 1: writeFile(inputFN); break;
+        case 2: readFile(inputFN); break;
+        case 3:
             printf("Enter output file name:\n");
             scanf("%s", outputFN);
             newFile(inputFN, outputFN);
             break;
-        case '4': readFile(outputFN); break;
-        case '5': break;
+        case 4: readFile(outputFN); break;
+        case 5: break;
         }
     }while(key!=5);
 
@@ -134,21 +133,21 @@ int newFile(char* inputFN, char* outputFN)
     char ans[q];
     char w[q][m];
     int n;
-    FILE *streamIn;
-    FILE *streamOut;
-    if((streamIn=fopen(inputFN, "r"))==NULL)
+    FILE *streamR;
+    FILE *streamWr;
+    if((streamR=fopen(inputFN, "r"))==NULL)
     {
         printf("Error opening input file\n");
         return 1;
     }
-    if((streamOut=fopen(outputFN, "w"))==NULL)
+    if((streamWr=fopen(outputFN, "w"))==NULL)
     {
         printf("Error opening output file\n");
         return 1;
     }
-    while(!feof(streamIn))
+    while(!feof(streamR))
     {
-        fgets(buf, 80, streamIn);
+        fgets(buf, 80, streamR);
         buf[strlen(buf)-2]='\0';
 
         n=divideByWords(buf, w);
@@ -158,11 +157,13 @@ int newFile(char* inputFN, char* outputFN)
 
         puts(ans);
         strcat(ans, "\n");
-        if(!fputs(ans, streamOut))
+        if(!fputs(ans, streamWr))
             printf("Success\n\n");
+        else
+            printf("Error\n\n");
     }
-    fclose(streamIn);
-    fclose(streamOut);
+    fclose(streamR);
+    fclose(streamWr);
     return 0;
 }
 
@@ -195,7 +196,7 @@ int writeFile(char* fn)
     }
     do{
         printf("Input string: \n");
-        fflush(stdin);
+        //fflush(stdin);
         gets(str);
         printf("Exit-y/n");
         ch=getch();
