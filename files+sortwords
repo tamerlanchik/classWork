@@ -1,8 +1,7 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
-//#include <string.h>
 const int m=255, q=50;
 
 char* strcat(char*,char*);
@@ -24,7 +23,7 @@ void outputMatrix(char[][m], int);
 
 int main()
 {
-    char inputFN[25], outputFN[25]; char key;
+    char inputFN[25], outputFN[25]; int key;
 
     printf("Enter input file name:\n");
     scanf("%s", inputFN);
@@ -194,9 +193,9 @@ int writeFile(char* fn)
         printf("Error opening file\n");
         return 1;
     }
+    fflush(stdin);      //чистим входной поток
     do{
         printf("Input string: \n");
-        //fflush(stdin);
         gets(str);
         printf("Exit-y/n");
         ch=getch();
