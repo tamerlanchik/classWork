@@ -1,7 +1,8 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
+//#include <string.h>
 const int m=255, q=50;
 
 char* strcat(char*,char*);
@@ -45,7 +46,7 @@ int main()
             newFile(inputFN, outputFN);
             break;
         case 4: readFile(outputFN); break;
-        case 5: break;
+        case 5: printf("Exit..."); break;
         }
     }while(key!=5);
 
