@@ -101,7 +101,6 @@ int repN(char* s)
                 if(fl)
                     rs[repCount++]=s[i];
             }
-            rs[repCount]='\0';
         }
     }
     return repCount;
@@ -110,18 +109,14 @@ int repN(char* s)
 void outputMatrix(char a[][m], int u)
 {
     for(int i=0; i<u; i++)
-
-    {
         puts(a[i]);
-    }
 }
 
 void buildStr(char* s, char w[][m], int n)
 {
+    *s='\0';
     for(int i=0; i<n; i++)
-    {
         strcat(s, strcat(w[i], " "));
-    }
 }
 int newFile(char* inputFN, char* outputFN)
 {
@@ -144,12 +139,12 @@ int newFile(char* inputFN, char* outputFN)
     while(!feof(streamIn))
     {
         fgets(buf, 80, streamIn);
-        if(buf[strlen(buf)-1]=='\n')
+        if(buf[strlen(buf)-1]=='\n')    //удаляем символ перевода строки, если есть
             buf[strlen(buf)-1]='\0';
 
         n=divideByWords(buf, w);
         sortWords(w, n);
-        *ans='\0';
+
         buildStr(ans, w, n);
 
         puts(ans);
