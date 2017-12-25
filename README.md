@@ -1,2 +1,2 @@
 # classWork
-Djdhjdj
+1 semestre of CS-practic
