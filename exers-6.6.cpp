@@ -1,14 +1,11 @@
-// exers-6.6.cpp: определяет точку входа для консольного приложения.
-//
-
-#include "stdafx.h"
+//#include "stdafx.h"
 #include <stdio.h>
 #include <conio.h>
 const int k=3, m=5;
 void inputArray(int[][m],int*,int*);
 void outputArray(int[][m],int,int);
-int isSymmetric(int[][m],int);
-int copySymmetricStrs(int[][m], int[], int, int);
+int isSymmetric(int[],int);
+int copySymmetricStrs(int[][m], int[][m], int, int);
 /*
 3 5
 0 4 1 4 0
@@ -17,17 +14,17 @@ int copySymmetricStrs(int[][m], int[], int, int);
 */
 int main()
 {
-	int l, n, c = 0; 
+	int l, n, c = 0;
 	int X[k][m];
 	inputArray(X, &l, &n);
 
 	printf("Source array:\n");
-	outputArray(X, l, n); 
+	outputArray(X, l, n);
 	int A[k][m];
-	copySymmetricStrs(X, A, l, n);
+	c=copySymmetricStrs(X, A, l, n);
 
 	printf("\nArray of symmetric str-s:\n");
-	outputArray(A, c, m);
+	outputArray(X, c, m);
 	getch();
 	return 0;
 }
