@@ -1,9 +1,20 @@
-// calcRoot2methods.cpp: îïðåäåëÿåò òî÷êó âõîäà äëÿ êîíñîëüíîãî ïðèëî
-#include "stdafx.h"
+//#include "stdafx.h"
 #include <conio.h>
 #include <stdio.h>
 #include <math.h>
 const double e = 2.718;
+double f0(double x)
+{
+    return x*x-4;
+}
+double fDer0(double x)
+{
+    return 2*x;
+}
+double sDer0(double x)
+{
+    return 2;
+}
 double f1(double x){
 	return sin(x)-x+2;
 }
@@ -38,30 +49,47 @@ int main()
 	printf("Eps: ");
 	scanf("%lf", &eps);
 	do{
+        printf("0: F=x^2-4\n");
 		printf("1: F=sin(x)-x+2)\n");
 		printf("2: F=e^x+ln(x/10)+2\n");
 		printf("3: Exit\n");
 		scanf("%d", &y);
-		
-		
+
+
 		switch(y) {
-     	case 1: 
+        case 0:
+            printf("Enter a, b \n");
+	     	scanf("%lf%lf", &a, &b);
+     		if(chordMeth(a, b, eps, f0, fDer0, &x, &c))
+	     		printf("ChordMeth: Cannot find ans\n");
+            else{
+                printf("ChordMeth: x=%lf\n", x);
+                printf("Iters: %d\n", c);
+            }
+            if(tanMeth(a, b, eps, f0, fDer0, sDer0, &x, &c))
+                printf("TanMeth: Cannot find ans\n");
+            else{
+                printf("TanMeth: x=%lf\n", x);
+                printf("Iters: %d\n", c);
+            }
+            break;
+     	case 1:
      		printf("Enter a, b \n");
 	     	scanf("%lf%lf", &a, &b);
-     		if(chordMeth(a, b, eps, f1, fDer1, &x, &c)) 
+     		if(chordMeth(a, b, eps, f1, fDer1, &x, &c))
 	     		printf("ChordMeth: Cannot find ans\n");
-				else{
-					printf("ChordMeth: x=%lf\n", x);
-					printf("Iters: %d\n", c);
-				}
-				if(tanMeth(a, b, eps, f1, fDer1, sDer1, &x, &c))
-					printf("TanMeth: Cannot find ans\n");
-				else{
-					printf("TanMeth: x=%lf\n", x);
-					printf("Iters: %d\n", c);
-				}
+            else{
+                printf("ChordMeth: x=%lf\n", x);
+                printf("Iters: %d\n", c);
+            }
+            if(tanMeth(a, b, eps, f1, fDer1, sDer1, &x, &c))
+                printf("TanMeth: Cannot find ans\n");
+            else{
+                printf("TanMeth: x=%lf\n", x);
+                printf("Iters: %d\n", c);
+            }
      		break;
-     			
+
 			case 2:
 				printf("Enter a, b \n");
 				printf("[a;b] range doesnt include \"0\" inside\n");
@@ -101,6 +129,7 @@ int chordMeth(double a,double b,double eps,double f(double x), double fDer(doubl
 				else
 					a=x;
 			}while(fabs(f(x))>eps);
+
 			*ans=x;
 		}
 	}
