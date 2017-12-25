@@ -72,3 +72,4 @@ int find(int a[], int l, int key)
 	}
 	return -1;
 }
+
