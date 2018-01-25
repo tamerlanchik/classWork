@@ -10,3 +10,4 @@ def bubbleSort(a, k, n):
     	            print(j//k, j%k, a[j//k][j%k], a[(j+1)//k][(j+1)%k])
     	    i+=1
     return a
+#test
