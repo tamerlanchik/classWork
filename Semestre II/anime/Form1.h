@@ -20,6 +20,54 @@ namespace animation {
 		Form1(void)
 		{
 			InitializeComponent();
+			x0 = 200;
+			y0 = Height / 2 - 100;
+			r = 80;
+			dX = 3;
+			dY = 2;
+			dA = 0.1;
+			dScale = 1.03;
+			maxSize = Math::Min(pictureBox1->Width, pictureBox1->Height) / 1.2;
+			minSize = 100;
+
+			b1 = gcnew SolidBrush(Color::Orange);
+			b2 = gcnew SolidBrush(Color::Blue);
+			b3 = gcnew SolidBrush(Color::Green);
+			b4 = gcnew SolidBrush(Color::Red);
+			//points3 = initHexagon(points3);
+			//points3 = initSandWatch(points3);
+			//initFigure(P1, P2, P3, P4);
+			P1 = gcnew array<PointF>(3);
+
+			P1[0] = PointF(x0 + r, y0);
+			P1[1] = PointF(x0, y0 + r);
+			P1[2] = PointF(x0 + r, y0 + r);
+
+			P2 = gcnew array<PointF>(3);
+
+			P2[0] = PointF(x0, y0 + r);
+			P2[1] = PointF(x0 - r, y0);
+			P2[2] = PointF(x0 - r, y0 + r);
+
+			P3 = gcnew array<PointF>(3);
+
+			P3[0] = PointF(x0 + r, y0);
+			P3[1] = PointF(x0 + r, y0 - r);
+			P3[2] = PointF(x0, y0 - r);
+
+			P4 = gcnew array<PointF>(3);
+
+			P4[0] = PointF(x0 - r, y0);
+			P4[1] = PointF(x0 - r, y0 - r);
+			P4[2] = PointF(x0, y0 - r);
+
+			gr = pictureBox1->CreateGraphics();
+			wW = Width;
+			wH = Height;
+			timerState = gcnew array<bool>(4);
+			for (int i = 0; i < timerState->Length; i++) {
+				timerState[i] = false;
+			}
 			/*p1 = gcnew Pen(Color::Black, 5);
 			b1 = gcnew SolidBrush(Color::Orange);
 			a = gcnew array<PointF>(6);
@@ -70,7 +118,8 @@ namespace animation {
 		Pen ^ p1;
 		//array <PointF>^ a;
 		array<PointF>  ^points3;
-		Brush^ b1;
+		array<PointF> ^P1, ^P2, ^P3, ^P4;
+		Brush ^b1, ^b2, ^b3, ^b4;
 		Graphics^ gr;
 		float x0, y0, r, dX, dY, dScale, maxSize, minSize;
 		int wW, wH;
@@ -211,8 +260,12 @@ namespace animation {
 		minSize = 100;
 
 		b1 = gcnew SolidBrush(Color::Orange);
+		b2 = gcnew SolidBrush(Color::Blue);
+		b3 = gcnew SolidBrush(Color::Green);
+		b4 = gcnew SolidBrush(Color::Red);
 		//points3 = initHexagon(points3);
-		points3 = initSandWatch(points3);
+		//points3 = initSandWatch(points3);
+		initFigure(P1, P2, P3, P4);
 
 		gr = pictureBox1->CreateGraphics();
 		wW = Width;
@@ -222,6 +275,31 @@ namespace animation {
 			timerState[i] = false;
 		}
 
+	}
+	private: System::Void initFigure(array<PointF>^ q1, array<PointF>^ q2, array<PointF>^ q3, array<PointF>^ q4) {
+		q1 = gcnew array<PointF>(3);
+
+		q1[0] = PointF(x0 + r, y0);
+		q1[1] = PointF(x0, y0 + r);
+		q1[2] = PointF(x0 + r, y0 + r);
+
+		q2 = gcnew array<PointF>(3);
+
+		q2[0] = PointF(x0, y0 + r);
+		q2[1] = PointF(x0 - r, y0);
+		q2[2] = PointF(x0 - r, y0 + r);
+
+		q3 = gcnew array<PointF>(3);
+
+		q3[0] = PointF(x0 - r, y0);
+		q3[1] = PointF(x0 - r, y0);
+		q3[2] = PointF(x0 - r, y0 - r);
+
+		q4 = gcnew array<PointF>(3);
+
+		q4[0] = PointF(x0 - r, y0);
+		q4[1] = PointF(x0 + r, y0);
+		q4[2] = PointF(x0 + r, y0 - r);
 	}
 	private: array<PointF>^ initHexagon(array<PointF>^ p) {
 		p = gcnew array<PointF>(6);
@@ -368,28 +446,40 @@ namespace animation {
 			 //ТАЙМЕРЫ
 			 //Пульсация
 	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
-		if (distance(points3[0], points3[1]) > maxSize) {
+		if (distance(P1[0], P1[1]) > maxSize) {
 			dScale = dScale>1 ? 1 / dScale : dScale;
 		}
-		else if (distance(points3[0], points3[1]) < minSize)
+		else if (distance(P1[0], P1[1]) < minSize)
 		{
 			dScale = dScale < 1 ? 1 / dScale : dScale;
 		}
-		scale(points3, dScale);
+		scale(P1, dScale);
+		scale(P2, dScale);
+		scale(P3, dScale);
+		scale(P4, dScale);
 	}
 			 //Движение по траектории
 	private: System::Void timer2_Tick(System::Object^  sender, System::EventArgs^  e) {
 		trajectoryWatch();
-		move(points3, dX, dY);
+		move(P1, dX, dY);
+		move(P2, dX, dY);
+		move(P3, dX, dY);
+		move(P4, dX, dY);
 	}
 			 //Вращение
 	private: System::Void timer3_Tick(System::Object^  sender, System::EventArgs^  e) {
-		rotate(points3, dA);
+		rotate(P1, dA);
+		rotate(P2, dA);
+		rotate(P3, dA);
+		rotate(P4, dA);
 	}
 			 //Отрисовка
 	private: System::Void timer4_Tick(System::Object^  sender, System::EventArgs^  e) {
 		clearArea();
-		draw(points3, b1);
+		draw(P1, b1);
+		draw(P2, b2);
+		draw(P3, b3);
+		draw(P4, b4);
 	}
 
 	private: double distance(PointF p1, PointF p2) {
