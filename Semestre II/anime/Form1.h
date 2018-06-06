@@ -20,78 +20,6 @@ namespace animation {
 		Form1(void)
 		{
 			InitializeComponent();
-			x0 = 200;
-			y0 = Height / 2 - 100;
-			r = 80;
-			dX = 3;
-			dY = 2;
-			dA = 0.1;
-			dScale = 1.03;
-			maxSize = Math::Min(pictureBox1->Width, pictureBox1->Height) / 1.2;
-			minSize = 100;
-
-			b1 = gcnew SolidBrush(Color::Orange);
-			b2 = gcnew SolidBrush(Color::Blue);
-			b3 = gcnew SolidBrush(Color::Green);
-			b4 = gcnew SolidBrush(Color::Red);
-			//points3 = initHexagon(points3);
-			//points3 = initSandWatch(points3);
-			//initFigure(P1, P2, P3, P4);
-			P1 = gcnew array<PointF>(3);
-
-			P1[0] = PointF(x0 + r, y0);
-			P1[1] = PointF(x0, y0 + r);
-			P1[2] = PointF(x0 + r, y0 + r);
-
-			P2 = gcnew array<PointF>(3);
-
-			P2[0] = PointF(x0, y0 + r);
-			P2[1] = PointF(x0 - r, y0);
-			P2[2] = PointF(x0 - r, y0 + r);
-
-			P3 = gcnew array<PointF>(3);
-
-			P3[0] = PointF(x0 + r, y0);
-			P3[1] = PointF(x0 + r, y0 - r);
-			P3[2] = PointF(x0, y0 - r);
-
-			P4 = gcnew array<PointF>(3);
-
-			P4[0] = PointF(x0 - r, y0);
-			P4[1] = PointF(x0 - r, y0 - r);
-			P4[2] = PointF(x0, y0 - r);
-
-			gr = pictureBox1->CreateGraphics();
-			wW = Width;
-			wH = Height;
-			timerState = gcnew array<bool>(4);
-			for (int i = 0; i < timerState->Length; i++) {
-				timerState[i] = false;
-			}
-			/*p1 = gcnew Pen(Color::Black, 5);
-			b1 = gcnew SolidBrush(Color::Orange);
-			a = gcnew array<PointF>(6);
-			a[0] = PointF(-100, -50);
-			a[1] = PointF(0, -100);
-			a[2] = PointF(100, -50);
-			a[3] = PointF(100, 50);
-			a[4] = PointF(0, 100);
-			a[5] = PointF(-100, 50);
-			x1 = pictureBox1->Size.Width / 2;
-			y1 = pictureBox1->Size.Height / 2;
-			for(int i=0; i<6; i++)
-			{
-			a[i].X+=x1;
-			a[i].Y+=y1;
-			}
-
-			dA = 0.1;
-			//центр вращения
-			x1+=30;
-			y1-=30;*/
-			//
-			//TODO: добавьте код конструктора
-			//
 		}
 
 	protected:
@@ -265,7 +193,30 @@ namespace animation {
 		b4 = gcnew SolidBrush(Color::Red);
 		//points3 = initHexagon(points3);
 		//points3 = initSandWatch(points3);
-		initFigure(P1, P2, P3, P4);
+		//initFigure(P1, P2, P3, P4);
+		P1 = gcnew array<PointF>(3);
+
+		P1[0] = PointF(x0 + r, y0);
+		P1[1] = PointF(x0, y0 + r);
+		P1[2] = PointF(x0 + r, y0 + r);
+
+		P2 = gcnew array<PointF>(3);
+
+		P2[0] = PointF(x0, y0 + r);
+		P2[1] = PointF(x0 - r, y0);
+		P2[2] = PointF(x0 - r, y0 + r);
+
+		P3 = gcnew array<PointF>(3);
+
+		P3[0] = PointF(x0 + r, y0);
+		P3[1] = PointF(x0 + r, y0 - r);
+		P3[2] = PointF(x0, y0 - r);
+
+		P4 = gcnew array<PointF>(3);
+
+		P4[0] = PointF(x0 - r, y0);
+		P4[1] = PointF(x0 - r, y0 - r);
+		P4[2] = PointF(x0, y0 - r);
 
 		gr = pictureBox1->CreateGraphics();
 		wW = Width;
@@ -275,31 +226,6 @@ namespace animation {
 			timerState[i] = false;
 		}
 
-	}
-	private: System::Void initFigure(array<PointF>^ q1, array<PointF>^ q2, array<PointF>^ q3, array<PointF>^ q4) {
-		q1 = gcnew array<PointF>(3);
-
-		q1[0] = PointF(x0 + r, y0);
-		q1[1] = PointF(x0, y0 + r);
-		q1[2] = PointF(x0 + r, y0 + r);
-
-		q2 = gcnew array<PointF>(3);
-
-		q2[0] = PointF(x0, y0 + r);
-		q2[1] = PointF(x0 - r, y0);
-		q2[2] = PointF(x0 - r, y0 + r);
-
-		q3 = gcnew array<PointF>(3);
-
-		q3[0] = PointF(x0 - r, y0);
-		q3[1] = PointF(x0 - r, y0);
-		q3[2] = PointF(x0 - r, y0 - r);
-
-		q4 = gcnew array<PointF>(3);
-
-		q4[0] = PointF(x0 - r, y0);
-		q4[1] = PointF(x0 + r, y0);
-		q4[2] = PointF(x0 + r, y0 - r);
 	}
 	private: array<PointF>^ initHexagon(array<PointF>^ p) {
 		p = gcnew array<PointF>(6);
