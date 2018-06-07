@@ -1,0 +1,557 @@
+#pragma once
+
+namespace RichBox {
+
+	using namespace System;
+	using namespace System::ComponentModel;
+	using namespace System::Collections;
+	using namespace System::Windows::Forms;
+	using namespace System::Data;
+	using namespace System::Drawing;
+
+	/// <summary>
+	/// Сводка для Form1
+	/// </summary>
+	public ref class Form1 : public System::Windows::Forms::Form
+	{
+	public:
+		Form1(void)
+		{
+			InitializeComponent();
+			//
+			//TODO: добавьте код конструктора
+			//
+		}
+
+	protected:
+		/// <summary>
+		/// Освободить все используемые ресурсы.
+		/// </summary>
+		~Form1()
+		{
+			if (components)
+			{
+				delete components;
+			}
+		}
+	private: System::Windows::Forms::MenuStrip^  menuStrip1;
+	protected:
+	private: System::Windows::Forms::ToolStripMenuItem^  файлToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  создатьToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  открытьToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  сохранитьToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  очиститьToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  закрытьToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  редактированиеToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  копироватьToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  вставитьToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  вырезатьToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  выделитьВсёToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  отменитьToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  работаToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  заданиеToolStripMenuItem;
+	private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
+	private: System::Windows::Forms::SaveFileDialog^  saveFileDialog1;
+	private: System::Windows::Forms::RichTextBox^  richTextBox1;
+
+	private:
+		/// <summary>
+		/// Требуется переменная конструктора.
+		/// </summary>
+		System::ComponentModel::Container ^components;
+	private: System::Windows::Forms::RichTextBox^  richTextBox2;
+			 int fl;
+			 SaveFileDialog^ Save;
+
+#pragma region Windows Form Designer generated code
+			 /// <summary>
+			 /// Обязательный метод для поддержки конструктора - не изменяйте
+			 /// содержимое данного метода при помощи редактора кода.
+			 /// </summary>
+			 void InitializeComponent(void)
+			 {
+				 this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+				 this->файлToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->создатьToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->открытьToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->сохранитьToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->очиститьToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->закрытьToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->редактированиеToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->копироватьToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->вставитьToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->вырезатьToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->выделитьВсёToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->отменитьToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->работаToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->заданиеToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+				 this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
+				 this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
+				 this->richTextBox2 = (gcnew System::Windows::Forms::RichTextBox());
+				 this->menuStrip1->SuspendLayout();
+				 this->SuspendLayout();
+				 // 
+				 // menuStrip1
+				 // 
+				 this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+					 this->файлToolStripMenuItem,
+						 this->редактированиеToolStripMenuItem, this->работаToolStripMenuItem
+				 });
+				 this->menuStrip1->Location = System::Drawing::Point(0, 0);
+				 this->menuStrip1->Name = L"menuStrip1";
+				 this->menuStrip1->Size = System::Drawing::Size(862, 33);
+				 this->menuStrip1->TabIndex = 0;
+				 this->menuStrip1->Text = L"menuStrip1";
+				 // 
+				 // файлToolStripMenuItem
+				 // 
+				 this->файлToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+					 this->создатьToolStripMenuItem,
+						 this->открытьToolStripMenuItem, this->сохранитьToolStripMenuItem, this->очиститьToolStripMenuItem, this->закрытьToolStripMenuItem
+				 });
+				 this->файлToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14.25F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
+					 System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+				 this->файлToolStripMenuItem->Name = L"файлToolStripMenuItem";
+				 this->файлToolStripMenuItem->Size = System::Drawing::Size(74, 29);
+				 this->файлToolStripMenuItem->Text = L"Файл";
+				 // 
+				 // создатьToolStripMenuItem
+				 // 
+				 this->создатьToolStripMenuItem->Name = L"создатьToolStripMenuItem";
+				 this->создатьToolStripMenuItem->Size = System::Drawing::Size(190, 30);
+				 this->создатьToolStripMenuItem->Text = L"Создать";
+				 this->создатьToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::создатьToolStripMenuItem_Click);
+				 // 
+				 // открытьToolStripMenuItem
+				 // 
+				 this->открытьToolStripMenuItem->Name = L"открытьToolStripMenuItem";
+				 this->открытьToolStripMenuItem->Size = System::Drawing::Size(190, 30);
+				 this->открытьToolStripMenuItem->Text = L"Открыть";
+				 this->открытьToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::открытьToolStripMenuItem_Click);
+				 // 
+				 // сохранитьToolStripMenuItem
+				 // 
+				 this->сохранитьToolStripMenuItem->Name = L"сохранитьToolStripMenuItem";
+				 this->сохранитьToolStripMenuItem->Size = System::Drawing::Size(190, 30);
+				 this->сохранитьToolStripMenuItem->Text = L"Сохранить";
+				 this->сохранитьToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::сохранитьToolStripMenuItem_Click);
+				 // 
+				 // очиститьToolStripMenuItem
+				 // 
+				 this->очиститьToolStripMenuItem->Name = L"очиститьToolStripMenuItem";
+				 this->очиститьToolStripMenuItem->Size = System::Drawing::Size(190, 30);
+				 this->очиститьToolStripMenuItem->Text = L"Очистить";
+				 this->очиститьToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::очиститьToolStripMenuItem_Click);
+				 // 
+				 // закрытьToolStripMenuItem
+				 // 
+				 this->закрытьToolStripMenuItem->Name = L"закрытьToolStripMenuItem";
+				 this->закрытьToolStripMenuItem->Size = System::Drawing::Size(190, 30);
+				 this->закрытьToolStripMenuItem->Text = L"Закрыть";
+				 this->закрытьToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::закрытьToolStripMenuItem_Click);
+				 // 
+				 // редактированиеToolStripMenuItem
+				 // 
+				 this->редактированиеToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+					 this->копироватьToolStripMenuItem,
+						 this->вставитьToolStripMenuItem, this->вырезатьToolStripMenuItem, this->выделитьВсёToolStripMenuItem, this->отменитьToolStripMenuItem
+				 });
+				 this->редактированиеToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14.25F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
+					 System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+				 this->редактированиеToolStripMenuItem->Name = L"редактированиеToolStripMenuItem";
+				 this->редактированиеToolStripMenuItem->Size = System::Drawing::Size(183, 29);
+				 this->редактированиеToolStripMenuItem->Text = L"Редактирование";
+				 // 
+				 // копироватьToolStripMenuItem
+				 // 
+				 this->копироватьToolStripMenuItem->Name = L"копироватьToolStripMenuItem";
+				 this->копироватьToolStripMenuItem->Size = System::Drawing::Size(217, 30);
+				 this->копироватьToolStripMenuItem->Text = L"Копировать";
+				 this->копироватьToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::копироватьToolStripMenuItem_Click);
+				 // 
+				 // вставитьToolStripMenuItem
+				 // 
+				 this->вставитьToolStripMenuItem->Name = L"вставитьToolStripMenuItem";
+				 this->вставитьToolStripMenuItem->Size = System::Drawing::Size(217, 30);
+				 this->вставитьToolStripMenuItem->Text = L"Вставить";
+				 this->вставитьToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::вставитьToolStripMenuItem_Click);
+				 // 
+				 // вырезатьToolStripMenuItem
+				 // 
+				 this->вырезатьToolStripMenuItem->Name = L"вырезатьToolStripMenuItem";
+				 this->вырезатьToolStripMenuItem->Size = System::Drawing::Size(217, 30);
+				 this->вырезатьToolStripMenuItem->Text = L"Вырезать";
+				 this->вырезатьToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::вырезатьToolStripMenuItem_Click);
+				 // 
+				 // выделитьВсёToolStripMenuItem
+				 // 
+				 this->выделитьВсёToolStripMenuItem->Name = L"выделитьВсёToolStripMenuItem";
+				 this->выделитьВсёToolStripMenuItem->Size = System::Drawing::Size(217, 30);
+				 this->выделитьВсёToolStripMenuItem->Text = L"Выделить всё";
+				 this->выделитьВсёToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::выделитьВсёToolStripMenuItem_Click);
+				 // 
+				 // отменитьToolStripMenuItem
+				 // 
+				 this->отменитьToolStripMenuItem->Name = L"отменитьToolStripMenuItem";
+				 this->отменитьToolStripMenuItem->Size = System::Drawing::Size(217, 30);
+				 this->отменитьToolStripMenuItem->Text = L"Отменить";
+				 this->отменитьToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::отменитьToolStripMenuItem_Click);
+				 // 
+				 // работаToolStripMenuItem
+				 // 
+				 this->работаToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->заданиеToolStripMenuItem });
+				 this->работаToolStripMenuItem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14.25F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
+					 System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+				 this->работаToolStripMenuItem->Name = L"работаToolStripMenuItem";
+				 this->работаToolStripMenuItem->Size = System::Drawing::Size(97, 29);
+				 this->работаToolStripMenuItem->Text = L"Работа";
+				 // 
+				 // заданиеToolStripMenuItem
+				 // 
+				 this->заданиеToolStripMenuItem->Name = L"заданиеToolStripMenuItem";
+				 this->заданиеToolStripMenuItem->Size = System::Drawing::Size(161, 30);
+				 this->заданиеToolStripMenuItem->Text = L"Задание";
+				 this->заданиеToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::заданиеToolStripMenuItem_Click);
+				 // 
+				 // openFileDialog1
+				 // 
+				 this->openFileDialog1->FileName = L"openFileDialog1";
+				 this->openFileDialog1->Filter = L"\"Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*\"|RTF файлы (*.rtf)|*.rtf";
+				 // 
+				 // richTextBox1
+				 // 
+				 this->richTextBox1->Location = System::Drawing::Point(12, 27);
+				 this->richTextBox1->Name = L"richTextBox1";
+				 this->richTextBox1->Size = System::Drawing::Size(539, 511);
+				 this->richTextBox1->TabIndex = 1;
+				 this->richTextBox1->Text = L"";
+				 this->richTextBox1->TextChanged += gcnew System::EventHandler(this, &Form1::richTextBox1_TextChanged);
+				 // 
+				 // richTextBox2
+				 // 
+				 this->richTextBox2->Location = System::Drawing::Point(557, 27);
+				 this->richTextBox2->Name = L"richTextBox2";
+				 this->richTextBox2->Size = System::Drawing::Size(293, 511);
+				 this->richTextBox2->TabIndex = 2;
+				 this->richTextBox2->Text = L"";
+				 // 
+				 // Form1
+				 // 
+				 this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+				 this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+				 this->ClientSize = System::Drawing::Size(862, 550);
+				 this->Controls->Add(this->richTextBox2);
+				 this->Controls->Add(this->richTextBox1);
+				 this->Controls->Add(this->menuStrip1);
+				 this->MainMenuStrip = this->menuStrip1;
+				 this->Name = L"Form1";
+				 this->Text = L"Текстовый редактор";
+				 this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &Form1::Form1_FormClosing);
+				 this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &Form1::Form1_FormClosed);
+				 this->menuStrip1->ResumeLayout(false);
+				 this->menuStrip1->PerformLayout();
+				 this->ResumeLayout(false);
+				 this->PerformLayout();
+
+			 }
+#pragma endregion
+
+			 void working1(RichTextBox ^rtb1, RichTextBox ^rtb2)
+			 {
+				 String ^s1;
+				 int l = richTextBox1->Lines->Length;
+				 int n;
+				 String^ s2 = "ab";
+				 richTextBox2->Clear();
+				 for (int i = 0; i<l; i++)
+				 {
+					 n = 0;
+					 s1 = Convert::ToString(rtb1->Lines[i]);
+					 poisk(richTextBox1->Lines[i], s2, &n);
+
+					 richTextBox2->AppendText(String::Concat(n, "\n"));
+				 }
+			 }
+			 void poisk(String^ s, String^ sT, int *c)
+			 {
+				 int t = 0;
+				 if (!s->Contains(sT)) { return; }
+				 while (t + sT->Length < s->Length) {
+					 int temp = 0;
+					 //ищем начало новой серии вхождений
+					 t = s->IndexOf(sT, t);
+					 //считаем кол-во вхождений в текущую серию
+					 while (s->IndexOf(sT, t) == t && t<s->Length) {
+						 temp++;
+						 t += sT->Length;
+					 }
+					 //выбираем максимум
+					 *c = (*c > temp ? *c : temp);
+				 }
+			 }
+
+			 void LoadMyFile(RichTextBox ^rtb)
+			 {
+				 OpenFileDialog^ openFile1 = gcnew OpenFileDialog();
+				 openFile1->DefaultExt = "*.rtf|*.txt|*.*";
+				 openFile1->Filter = "RTF Files|*.rtf|Text files|*.txt|All files|*.*";
+				 if (openFile1->ShowDialog() == System::Windows::Forms::DialogResult::OK && openFile1->FileName->Length > 0)
+				 {
+					 rtb->LoadFile(openFile1->FileName, RichTextBoxStreamType::PlainText);
+				 }
+				 else
+				 {
+					 MessageBox::Show("Ошибка открытия файла");
+				 }
+			 }
+
+
+			 void SaveMyFile(RichTextBox ^rtb)
+			 {
+				 SaveFileDialog^ saveFile1 = gcnew SaveFileDialog();
+				 saveFile1->DefaultExt = "*.rtf|*.txt|*.*";
+				 saveFile1->Filter = "RTF Files|*.rtf|Text files|*.txt|All files|*.*";
+				 if (saveFile1->ShowDialog() == System::Windows::Forms::DialogResult::OK && saveFile1->FileName->Length > 0)
+				 {
+					 rtb->SaveFile(saveFile1->FileName, RichTextBoxStreamType::PlainText);
+				 }
+				 else
+				 {
+					 MessageBox::Show("Ошибка при сохранении файла");
+				 }
+			 }
+
+			 void CreateMyFile(RichTextBox ^rtb)
+			 {
+				 SaveFileDialog^ saveFile1 = gcnew SaveFileDialog();
+				 saveFile1->DefaultExt = "*.rtf|*.txt|*.*";
+				 saveFile1->Filter = "RTF Files|*.rtf|Text files|*.txt|All files|*.*";
+				 if (saveFile1->ShowDialog() == System::Windows::Forms::DialogResult::OK && saveFile1->FileName->Length > 0)
+				 {
+					 rtb->SaveFile(saveFile1->FileName, RichTextBoxStreamType::PlainText);
+				 }
+				 else
+				 {
+					 MessageBox::Show("Ошибка при создании файла");
+				 }
+			 }
+
+
+
+
+	private: System::Void открытьToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		if (fl == 0)
+		{
+			richTextBox1->Clear();
+			LoadMyFile(richTextBox1);
+		}
+		else
+		{
+			System::Windows::Forms::DialogResult result;
+			result = MessageBox::Show(this, "Файл был изменён! Сохранить изменения?", "Error", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Error);
+			if (result == System::Windows::Forms::DialogResult::Yes)
+			{
+				SaveMyFile(richTextBox1);
+				fl = 0;
+				richTextBox1->Clear();
+				LoadMyFile(richTextBox1);
+			}
+			else if (result == System::Windows::Forms::DialogResult::No)
+			{
+				richTextBox1->Clear();
+				LoadMyFile(richTextBox1);
+			}
+			else if (result == System::Windows::Forms::DialogResult::Cancel)
+			{
+			}
+		}
+	}
+	private: System::Void сохранитьToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		SaveMyFile(richTextBox1);
+		fl = 0;
+	}
+	private: System::Void закрытьToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		if (fl)
+		{
+			System::Windows::Forms::DialogResult result;
+			result = MessageBox::Show(this, "Файл был изменён! Сохранить изменения?", "Error", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Error);
+			if (result == System::Windows::Forms::DialogResult::Yes)
+			{
+				SaveMyFile(richTextBox1);
+				fl = 0;
+				Application::Exit();
+			}
+			else if (result == System::Windows::Forms::DialogResult::No)
+			{
+				fl = 0;
+				Application::Exit();
+			}
+			else if (result == System::Windows::Forms::DialogResult::Cancel)
+			{
+			}
+		}
+		else
+		{
+			Application::Exit();
+		}
+	}
+
+	private: System::Void richTextBox1_TextChanged(System::Object^  sender, System::EventArgs^  e)
+	{
+		fl = 1;
+	}
+
+
+	private: System::Void очиститьToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		if (fl == 0)
+		{
+			richTextBox1->Clear();
+		}
+		else
+		{
+			System::Windows::Forms::DialogResult result;
+			result = MessageBox::Show(this, "Файл был изменён! Сохранить изменения?", "Error", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Error);
+			if (result == System::Windows::Forms::DialogResult::Yes)
+			{
+				SaveMyFile(richTextBox1);
+				fl = 0;
+				richTextBox1->Clear();
+			}
+			else if (result == System::Windows::Forms::DialogResult::No)
+			{
+				richTextBox1->Clear();
+			}
+			else if (result == System::Windows::Forms::DialogResult::Cancel)
+			{
+			}
+		}
+		fl = 0;
+	}
+	private: System::Void создатьToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		if (fl == 0)
+		{
+			richTextBox1->Clear();
+		}
+		else
+		{
+			System::Windows::Forms::DialogResult result;
+			result = MessageBox::Show(this, "Файл был изменён! Сохранить изменения?", "Error", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Error);
+			if (result == System::Windows::Forms::DialogResult::Yes)
+			{
+				SaveMyFile(richTextBox1);
+				fl = 0;
+				richTextBox1->Clear();
+			}
+			else if (result == System::Windows::Forms::DialogResult::No)
+			{
+				richTextBox1->Clear();
+			}
+			else if (result == System::Windows::Forms::DialogResult::Cancel)
+			{
+			}
+		}
+	}
+
+	private: System::Void копироватьToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		if (richTextBox1->SelectionLength > 0)
+		{
+			richTextBox1->Copy();
+		}
+		else
+		{
+			MessageBox::Show("Ничего не выделено для копирования!");
+		}
+	}
+
+	private: System::Void вырезатьToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		if (!richTextBox1->SelectedText->Equals(""))
+		{
+			richTextBox1->Cut();
+		}
+		else
+		{
+			MessageBox::Show("Ничего не выделено для удаления!");
+		}
+	}
+	private: System::Void вставитьToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		System::Windows::Forms::DialogResult result;
+		if (Clipboard::GetDataObject()->GetDataPresent(DataFormats::Text) == true)
+		{
+			if (richTextBox1->SelectionLength > 0)
+			{
+				result = MessageBox::Show("Вставить поверх выделенного текста?", "Cut Example", MessageBoxButtons::YesNoCancel);
+				if (result == System::Windows::Forms::DialogResult::No)
+				{
+					richTextBox1->SelectionStart = richTextBox1->SelectionStart + richTextBox1->SelectionLength;
+					richTextBox1->Paste();
+				}
+				if (result == System::Windows::Forms::DialogResult::Yes)
+					richTextBox1->Paste();
+			}
+			else
+				richTextBox1->Paste();
+		}
+	}
+	private: System::Void отменитьToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		if (richTextBox1->CanUndo == true)
+		{
+			richTextBox1->Undo();
+			richTextBox1->ClearUndo();
+		}
+	}
+	private: System::Void выделитьВсёToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		richTextBox1->SelectAll();
+	}
+
+
+	private: System::Void Form1_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
+	{
+		if (fl)
+		{
+			System::Windows::Forms::DialogResult result;
+			result = MessageBox::Show(this, "Файл был изменён! Сохранить изменения?", "Error", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Error);
+			if (result == System::Windows::Forms::DialogResult::Yes)
+			{
+				SaveMyFile(richTextBox1);
+				fl = 0;
+				Application::Exit();
+			}
+			else if (result == System::Windows::Forms::DialogResult::No)
+			{
+				fl = 0;
+				Application::Exit();
+			}
+			else if (result == System::Windows::Forms::DialogResult::Cancel)
+			{
+				Save = gcnew SaveFileDialog;
+			}
+
+		}
+	}
+	private: System::Void Form1_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e)
+	{
+		if (fl)
+		{
+
+			RichTextBox ^rtb;
+			rtb->LoadFile(Save->FileName, RichTextBoxStreamType::PlainText);
+		}
+	}
+	private: System::Void заданиеToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		working1(richTextBox1, richTextBox2);
+	}
+	};
+}
+
