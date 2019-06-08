@@ -1,3 +1,3 @@
 # classWork
 1 semestre of CS-practic
-sds
+Лабы "У Рязановой" МГТУ
